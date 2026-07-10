@@ -3,6 +3,8 @@ import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from dotenv import load_dotenv
+from aiogram.enums import ParseMode
+from aiogram.client.default import DefaultBotProperties
 
 # 1. Загрузка настроек
 load_dotenv()
@@ -13,7 +15,10 @@ if not TOKEN:
     print("❌ Ошибка: Токен не найден в файле .env")
     exit()
 
-bot = Bot(token=TOKEN)
+bot = Bot(
+    token=TOKEN,
+    default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+)
 dp = Dispatcher()
 
 # --- ХЭНДЛЕРЫ (ОБРАБОТЧИКИ) ---
@@ -33,9 +38,21 @@ async def cmd_help(message: types.Message):
     await message.answer(
         "🤖 Справка:\n\n"
         "/start - Начать работу заново\n"
-        "/help - Показать это сообщение\n\n"
+        "/help - Показать это сообщение\n"
+        "/about - Об авторе\n\n"
         "Просто отправь мне любой текст, и я отвечу."
     )
+
+@dp.message(Command("about"))
+async def cmd_start(message: types.Message):
+    await message.answer(
+        "я бот <b>залупыш</b>\n"
+        "создан <i>сонечкой ешану</i>\n"
+        "<a href='https://vk.com/wall-202965685_3221'>лучшей айтишницей всея белогорья</a>\n\n"
+        "а ты сдал инфу на сотку?"
+    )
+
+    
 
 # 4. "Ловушка" для всех остальных сообщений
 # (Ставим В САМОМ НИЗУ. Если поставить выше, команды сломаются!)
