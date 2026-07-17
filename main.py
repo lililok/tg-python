@@ -14,7 +14,7 @@ TOKEN = os.getenv("BOT_TOKEN")
 
 # --- НАСТРОЙКИ ---
 # Сюда мы вставим ID картинки, когда получим его
-PHOTO_ID = "" 
+PHOTO_ID = "AgACAgIAAxkBAANValpw4Of3z-pQC-pegeZFcuMQIBUAAsocaxsj2dFKWTENjLPXEiABAAMCAAN4AAM9BA" 
 
 bot = Bot(
     token=TOKEN,
